@@ -10,7 +10,7 @@ export interface Todo {
   id: number;
   title: string;
   completed: boolean;
-  priority: string;
+  priority: "Low" | "Medium" | "High";
   createdAt: string;
 }
 
@@ -20,12 +20,15 @@ function App() {
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [sortBy, setSortBy] = useState("createdAt");
 
-  console.log(todos);
-
   useEffect(() => {
     const getInitTodos = async () => {
       const initTodos = await getTodos();
-      setTodos(initTodos);
+      setTodos(
+        initTodos.map((todo) => ({
+          ...todo,
+          priority: todo.priority as "Low" | "Medium" | "High",
+        }))
+      );
     };
     getInitTodos();
   }, []);
@@ -77,7 +80,9 @@ function App() {
           const priorityValues = { Low: 1, Medium: 2, High: 3 };
           return priorityValues[b.priority] - priorityValues[a.priority];
         }
-        return new Date(b.createdAt) - new Date(a.createdAt);
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
       });
   };
 
