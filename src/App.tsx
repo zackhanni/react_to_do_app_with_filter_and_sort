@@ -102,7 +102,7 @@ function App() {
   };
 
   return (
-    <div className="App space-y-4">
+    <div className="App space-y-4 pb-4">
       <h1>Todo Manager</h1>
 
       <TodoStats todos={todos} />
