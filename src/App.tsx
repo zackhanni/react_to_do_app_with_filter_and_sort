@@ -109,8 +109,12 @@ function App() {
       <TodoForm addTodo={addTodo} />
       {/* Filter and Sort Controls */}
       {todos.length > 0 && (
-        <div className="controls">
-          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+        <div className="controls space-x-2">
+          <select
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            className="bg-gray-100 p-2 rounded-lg text-sm"
+          >
             <option value="all">All</option>
             <option value="active">Active</option>
             <option value="completed">Completed</option>
@@ -119,6 +123,7 @@ function App() {
           <select
             value={priorityFilter}
             onChange={(e) => setPriorityFilter(e.target.value)}
+            className="bg-gray-100 p-2 rounded-lg text-sm"
           >
             <option value="all">All Priorities</option>
             <option value="Low">Low</option>
@@ -126,7 +131,11 @@ function App() {
             <option value="High">High</option>
           </select>
 
-          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="bg-gray-100 p-2 rounded-lg text-sm"
+          >
             <option value="createdAt">Sort by Date</option>
             <option value="priority">Sort by Priority</option>
           </select>
