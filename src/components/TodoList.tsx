@@ -1,4 +1,4 @@
-import { BiCheck, BiTrash } from "react-icons/bi";
+import { BiCheck, BiEdit, BiTrash } from "react-icons/bi";
 import { BsCircleFill } from "react-icons/bs";
 import type { Todo } from "../App";
 
@@ -46,7 +46,7 @@ const TodoItem = ({
   return (
     <li
       className={
-        "flex items-center justify-between p-3 rounded-lg border opacity-70"
+        "flex items-center justify-between p-3 rounded-lg border opacity-70 gap-2"
       }
     >
       <div className="flex items-center gap-3 flex-1">
@@ -71,13 +71,18 @@ const TodoItem = ({
           </label>
         </div>
       </div>
-      <button
-        onClick={() => deleteTodo(todo.id)}
-        aria-label="Delete todo"
-        className="hover:text-red-500 hover:bg-red-100 hover:border-red-600!"
-      >
-        <BiTrash />
-      </button>
+      <div className="space-x-2">
+        <button className="rounded-lg border-1 border-transparent hover:border-blue-600 px-4 py-2 bg-gray-100 hover:bg-blue-100 hover:text-blue-600 duration-200">
+          <BiEdit />
+        </button>
+        <button
+          onClick={() => deleteTodo(todo.id)}
+          aria-label="Delete todo"
+          className="rounded-lg border-1 border-transparent hover:border-red-600 px-4 py-2 bg-gray-100 hover:text-red-600 hover:bg-red-100 duration-200"
+        >
+          <BiTrash />
+        </button>
+      </div>
     </li>
   );
 };

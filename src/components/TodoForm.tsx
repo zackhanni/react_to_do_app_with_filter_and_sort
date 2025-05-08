@@ -61,7 +61,7 @@ export const TodoForm = ({ addTodo }: { addTodo: (todo: NewTodo) => void }) => {
 
       <button
         type="submit"
-        className="w-full bg-gray-100 text-gray-600 hover:border-gray-600!"
+        className="w-full rounded-lg border-1 px-2 py-3 border-transparent hover:border-gray-600 bg-gray-100 text-gray-600 duration-200"
       >
         Add Todo
       </button>
