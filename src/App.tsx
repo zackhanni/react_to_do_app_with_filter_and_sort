@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 
 import { getTodos } from "./database/demoList";
@@ -20,18 +20,33 @@ function App() {
   const [priorityFilter, setPriorityFilter] = useState("all");
   const [sortBy, setSortBy] = useState("createdAt");
 
+  const hasLoaded = useRef(false);
+
   useEffect(() => {
-    const getInitTodos = async () => {
-      const initTodos = await getTodos();
-      setTodos(
-        initTodos.map((todo) => ({
-          ...todo,
-          priority: todo.priority as "Low" | "Medium" | "High",
-        }))
-      );
-    };
-    getInitTodos();
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos && JSON.parse(savedTodos).length > 0) {
+      setTodos(JSON.parse(savedTodos));
+    } else {
+      const getInitTodos = async () => {
+        const initTodos = await getTodos();
+        setTodos(
+          initTodos.map((todo) => ({
+            ...todo,
+            priority: todo.priority as "Low" | "Medium" | "High",
+          }))
+        );
+      };
+      getInitTodos();
+    }
   }, []);
+
+  useEffect(() => {
+    if (hasLoaded.current) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    } else {
+      hasLoaded.current = true;
+    }
+  }, [todos]);
 
   // Add todo handler
   const addTodo = (newTodo: NewTodo) => {
@@ -93,28 +108,30 @@ function App() {
       <TodoStats todos={todos} />
       <TodoForm addTodo={addTodo} />
       {/* Filter and Sort Controls */}
-      <div className="controls">
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-          <option value="all">All</option>
-          <option value="active">Active</option>
-          <option value="completed">Completed</option>
-        </select>
+      {todos.length > 0 && (
+        <div className="controls">
+          <select value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+          </select>
 
-        <select
-          value={priorityFilter}
-          onChange={(e) => setPriorityFilter(e.target.value)}
-        >
-          <option value="all">All Priorities</option>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
+          <select
+            value={priorityFilter}
+            onChange={(e) => setPriorityFilter(e.target.value)}
+          >
+            <option value="all">All Priorities</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
 
-        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="createdAt">Sort by Date</option>
-          <option value="priority">Sort by Priority</option>
-        </select>
-      </div>
+          <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+            <option value="createdAt">Sort by Date</option>
+            <option value="priority">Sort by Priority</option>
+          </select>
+        </div>
+      )}
       <TodoList
         todos={getFilteredTodos()}
         toggleTodo={toggleTodo}
