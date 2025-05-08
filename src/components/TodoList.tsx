@@ -11,6 +11,15 @@ export const TodoList = ({
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
 }) => {
+  if (!todos.length) {
+    return (
+      <div className="px-4 py-16 border-1 rounded-lg">
+        <p>No todos found.</p>
+        <p>Use the form above to create a new one.</p>
+      </div>
+    );
+  }
+
   return (
     <ul className="space-y-2">
       {todos.map((todo: Todo) => (
