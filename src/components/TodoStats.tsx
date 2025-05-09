@@ -23,7 +23,9 @@ export const TodoStats = ({
     }
   };
   getStats(todos);
-  const HighPriorityTodos = todos.filter((todo) => todo.priority === "High");
+  const HighPriorityTodos = todos.filter(
+    (todo) => todo.priority === "High" && todo.completed === false
+  );
   // .slice(0, 5);
 
   return (
