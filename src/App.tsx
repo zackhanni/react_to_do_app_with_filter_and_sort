@@ -118,7 +118,7 @@ function App() {
     <div className="App space-y-4 pb-4">
       <h1>Todo Manager</h1>
 
-      <TodoStats todos={todos} />
+      <TodoStats todos={todos} toggleTodo={toggleTodo} />
       <TodoForm addTodo={addTodo} />
       {/* Filter and Sort Controls */}
       {todos.length > 0 && (

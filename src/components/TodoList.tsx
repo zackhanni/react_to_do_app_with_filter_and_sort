@@ -38,7 +38,7 @@ export const TodoList = ({
   );
 };
 
-const TodoItem = ({
+export const TodoItem = ({
   todo,
   deleteTodo,
   toggleTodo,
