@@ -57,9 +57,6 @@ export const TodoStats = ({
             );
           })}
         </ul>
-        {/* <button className="w-full rounded-lg border-1 px-2 py-1 border-transparent hover:border-gray-600 bg-gray-100 text-gray-600 duration-200">
-          All high priority tasks
-        </button> */}
       </div>
     </div>
   );
