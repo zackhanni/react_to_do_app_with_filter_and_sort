@@ -75,6 +75,19 @@ function App() {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  // Edit todo
+  const editTodo = (
+    id: Todo["id"],
+    title: Todo["title"],
+    priority: Todo["priority"]
+  ) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id == id ? { ...todo, title: title, priority: priority } : todo
+      )
+    );
+  };
+
   // Get filtered and sorted todos
   const getFilteredTodos = () => {
     return todos
@@ -145,6 +158,7 @@ function App() {
         todos={getFilteredTodos()}
         toggleTodo={toggleTodo}
         deleteTodo={deleteTodo}
+        editTodo={editTodo}
       />
     </div>
   );
