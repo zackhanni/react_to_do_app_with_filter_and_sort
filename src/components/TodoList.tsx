@@ -68,9 +68,9 @@ const TodoItem = ({
           <BiCheck />
         ) : (
           <BsCircleFill
-            className={`${priority === "Low" && "text-green-500"} ${
-              priority === "Medium" && "text-yellow-500"
-            } ${priority === "High" && "text-red-500"}`}
+            className={`${todo.priority === "Low" && "text-green-500"} ${
+              todo.priority === "Medium" && "text-yellow-500"
+            } ${todo.priority === "High" && "text-red-500"}`}
           />
         )}
 
