@@ -12,7 +12,7 @@ export const TodoList = ({
   todos: Todo[];
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
-  editTodo: (id: number, title: string, priority: string) => void;
+  editTodo: (id: number, title: string, priority: Todo["priority"]) => void;
 }) => {
   if (!todos.length) {
     return (
@@ -47,7 +47,7 @@ const TodoItem = ({
   todo: Todo;
   toggleTodo: (id: number) => void;
   deleteTodo: (id: number) => void;
-  editTodo: (id: number, title: string, priority: string) => void;
+  editTodo: (id: number, title: string, priority: Todo["priority"]) => void;
 }) => {
   const [editingMode, setEditingMode] = useState(false);
   const [title, setTitle] = useState(todo.title);
